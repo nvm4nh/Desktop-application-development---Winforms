@@ -31,165 +31,39 @@ partial class FormGuest
     /// </summary>
     private void InitializeComponent()
     {
-        groupBox1 = new GroupBox();
-        btn_search = new Button();
-        btn_delete = new Button();
-        btn_update = new Button();
-        btn_add = new Button();
-        cbo_Rank = new ComboBox();
-        txt_Phone = new TextBox();
-        txt_GuestName = new TextBox();
-        txt_GuestID = new TextBox();
-        label4 = new Label();
-        label3 = new Label();
-        label2 = new Label();
-        label1 = new Label();
         mySqlCommand1 = new MySql.Data.MySqlClient.MySqlCommand();
         dgv_Guest = new DataGridView();
-        col_CustomerID = new DataGridViewTextBoxColumn();
-        col_customer_name = new DataGridViewTextBoxColumn();
-        col_PhoneNumber = new DataGridViewTextBoxColumn();
-        col_RewardPoints = new DataGridViewTextBoxColumn();
-        col_MembershipTier = new DataGridViewTextBoxColumn();
-        groupBox1.SuspendLayout();
+        btn_AddCustomer = new Button();
+        btn_Edit = new Button();
+        btn_PurchaseHistory = new Button();
+        btn_Refresh = new Button();
+        groupBox1 = new GroupBox();
+        groupBox2 = new GroupBox();
+        label1 = new Label();
+        groupBox3 = new GroupBox();
+        txt_Search = new TextBox();
+        col_Phone = new DataGridViewTextBoxColumn();
+        col_Name = new DataGridViewTextBoxColumn();
+        col_Type = new DataGridViewTextBoxColumn();
+        col_Point = new DataGridViewTextBoxColumn();
+        col_Total = new DataGridViewTextBoxColumn();
+        col_Date = new DataGridViewTextBoxColumn();
+        label2 = new Label();
+        label3 = new Label();
+        label4 = new Label();
+        label5 = new Label();
+        label6 = new Label();
+        btn_Save = new Button();
+        btn_Cancel = new Button();
+        cbo_CustomerType = new ComboBox();
+        txt_Address = new TextBox();
+        txt_FullName = new TextBox();
+        txt_PhoneNumber = new TextBox();
         ((ISupportInitialize)dgv_Guest).BeginInit();
+        groupBox1.SuspendLayout();
+        groupBox2.SuspendLayout();
+        groupBox3.SuspendLayout();
         SuspendLayout();
-        // 
-        // groupBox1
-        // 
-        groupBox1.Controls.Add(btn_search);
-        groupBox1.Controls.Add(btn_delete);
-        groupBox1.Controls.Add(btn_update);
-        groupBox1.Controls.Add(btn_add);
-        groupBox1.Controls.Add(cbo_Rank);
-        groupBox1.Controls.Add(txt_Phone);
-        groupBox1.Controls.Add(txt_GuestName);
-        groupBox1.Controls.Add(txt_GuestID);
-        groupBox1.Controls.Add(label4);
-        groupBox1.Controls.Add(label3);
-        groupBox1.Controls.Add(label2);
-        groupBox1.Controls.Add(label1);
-        groupBox1.Location = new Point(13, 17);
-        groupBox1.Margin = new Padding(1, 1, 1, 1);
-        groupBox1.Name = "groupBox1";
-        groupBox1.Padding = new Padding(1, 1, 1, 1);
-        groupBox1.Size = new Size(713, 177);
-        groupBox1.TabIndex = 0;
-        groupBox1.TabStop = false;
-        groupBox1.Text = "groupBox1";
-        // 
-        // btn_search
-        // 
-        btn_search.Location = new Point(252, 120);
-        btn_search.Margin = new Padding(1, 1, 1, 1);
-        btn_search.Name = "btn_search";
-        btn_search.Size = new Size(55, 20);
-        btn_search.TabIndex = 12;
-        btn_search.Text = "Tìm Kiếm";
-        btn_search.UseVisualStyleBackColor = true;
-        // 
-        // btn_delete
-        // 
-        btn_delete.Location = new Point(174, 120);
-        btn_delete.Margin = new Padding(1, 1, 1, 1);
-        btn_delete.Name = "btn_delete";
-        btn_delete.Size = new Size(55, 20);
-        btn_delete.TabIndex = 10;
-        btn_delete.Text = "Xóa";
-        btn_delete.UseVisualStyleBackColor = true;
-        // 
-        // btn_update
-        // 
-        btn_update.Location = new Point(93, 120);
-        btn_update.Margin = new Padding(1, 1, 1, 1);
-        btn_update.Name = "btn_update";
-        btn_update.Size = new Size(55, 20);
-        btn_update.TabIndex = 9;
-        btn_update.Text = "Sửa";
-        btn_update.UseVisualStyleBackColor = true;
-        // 
-        // btn_add
-        // 
-        btn_add.Location = new Point(17, 120);
-        btn_add.Margin = new Padding(1, 1, 1, 1);
-        btn_add.Name = "btn_add";
-        btn_add.Size = new Size(55, 20);
-        btn_add.TabIndex = 8;
-        btn_add.Text = "Thêm";
-        btn_add.UseVisualStyleBackColor = true;
-        // 
-        // cbo_Rank
-        // 
-        cbo_Rank.FormattingEnabled = true;
-        cbo_Rank.Location = new Point(62, 90);
-        cbo_Rank.Margin = new Padding(1, 1, 1, 1);
-        cbo_Rank.Name = "cbo_Rank";
-        cbo_Rank.Size = new Size(73, 28);
-        cbo_Rank.TabIndex = 7;
-        // 
-        // txt_Phone
-        // 
-        txt_Phone.Location = new Point(62, 61);
-        txt_Phone.Margin = new Padding(1, 1, 1, 1);
-        txt_Phone.Name = "txt_Phone";
-        txt_Phone.Size = new Size(61, 27);
-        txt_Phone.TabIndex = 6;
-        // 
-        // txt_GuestName
-        // 
-        txt_GuestName.Location = new Point(62, 40);
-        txt_GuestName.Margin = new Padding(1, 1, 1, 1);
-        txt_GuestName.Name = "txt_GuestName";
-        txt_GuestName.Size = new Size(61, 27);
-        txt_GuestName.TabIndex = 5;
-        // 
-        // txt_GuestID
-        // 
-        txt_GuestID.Location = new Point(62, 22);
-        txt_GuestID.Margin = new Padding(1, 1, 1, 1);
-        txt_GuestID.Name = "txt_GuestID";
-        txt_GuestID.Size = new Size(61, 27);
-        txt_GuestID.TabIndex = 4;
-        // 
-        // label4
-        // 
-        label4.AutoSize = true;
-        label4.Location = new Point(17, 90);
-        label4.Margin = new Padding(1, 0, 1, 0);
-        label4.Name = "label4";
-        label4.Size = new Size(51, 20);
-        label4.TabIndex = 3;
-        label4.Text = "HẠNG";
-        // 
-        // label3
-        // 
-        label3.AutoSize = true;
-        label3.Location = new Point(17, 62);
-        label3.Margin = new Padding(1, 0, 1, 0);
-        label3.Name = "label3";
-        label3.Size = new Size(36, 20);
-        label3.TabIndex = 2;
-        label3.Text = "SĐT";
-        // 
-        // label2
-        // 
-        label2.AutoSize = true;
-        label2.Location = new Point(17, 40);
-        label2.Margin = new Padding(1, 0, 1, 0);
-        label2.Name = "label2";
-        label2.Size = new Size(56, 20);
-        label2.TabIndex = 1;
-        label2.Text = "Tên KH";
-        // 
-        // label1
-        // 
-        label1.AutoSize = true;
-        label1.Location = new Point(17, 22);
-        label1.Margin = new Padding(1, 0, 1, 0);
-        label1.Name = "label1";
-        label1.Size = new Size(54, 20);
-        label1.TabIndex = 0;
-        label1.Text = "Mã KH";
         // 
         // mySqlCommand1
         // 
@@ -201,85 +75,293 @@ partial class FormGuest
         // dgv_Guest
         // 
         dgv_Guest.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-        dgv_Guest.Columns.AddRange(new DataGridViewColumn[] { col_CustomerID, col_customer_name, col_PhoneNumber, col_RewardPoints, col_MembershipTier });
-        dgv_Guest.Location = new Point(30, 217);
-        dgv_Guest.Margin = new Padding(1, 1, 1, 1);
+        dgv_Guest.Columns.AddRange(new DataGridViewColumn[] { col_Phone, col_Name, col_Type, col_Point, col_Total, col_Date });
+        dgv_Guest.Location = new Point(8, 93);
+        dgv_Guest.Margin = new Padding(1);
         dgv_Guest.Name = "dgv_Guest";
         dgv_Guest.RowHeadersWidth = 51;
-        dgv_Guest.Size = new Size(696, 300);
+        dgv_Guest.Size = new Size(752, 319);
         dgv_Guest.TabIndex = 1;
         // 
-        // col_CustomerID
+        // btn_AddCustomer
         // 
-        col_CustomerID.HeaderText = "Mã KH";
-        col_CustomerID.MinimumWidth = 6;
-        col_CustomerID.Name = "col_CustomerID";
-        col_CustomerID.Width = 125;
+        btn_AddCustomer.Location = new Point(19, 43);
+        btn_AddCustomer.Name = "btn_AddCustomer";
+        btn_AddCustomer.Size = new Size(140, 54);
+        btn_AddCustomer.TabIndex = 2;
+        btn_AddCustomer.Text = "Thêm KH";
+        btn_AddCustomer.UseVisualStyleBackColor = true;
         // 
-        // col_customer_name
+        // btn_Edit
         // 
-        col_customer_name.HeaderText = "Tên KH\n\n";
-        col_customer_name.MinimumWidth = 6;
-        col_customer_name.Name = "col_customer_name";
-        col_customer_name.Width = 125;
+        btn_Edit.Location = new Point(175, 43);
+        btn_Edit.Name = "btn_Edit";
+        btn_Edit.Size = new Size(140, 54);
+        btn_Edit.TabIndex = 3;
+        btn_Edit.Text = "Sửa";
+        btn_Edit.UseVisualStyleBackColor = true;
+        btn_Edit.Click += btn_Edit_Click;
         // 
-        // col_PhoneNumber
+        // btn_PurchaseHistory
         // 
-        col_PhoneNumber.HeaderText = "SĐT";
-        col_PhoneNumber.MinimumWidth = 6;
-        col_PhoneNumber.Name = "col_PhoneNumber";
-        col_PhoneNumber.Width = 125;
+        btn_PurchaseHistory.Location = new Point(333, 43);
+        btn_PurchaseHistory.Name = "btn_PurchaseHistory";
+        btn_PurchaseHistory.Size = new Size(140, 54);
+        btn_PurchaseHistory.TabIndex = 4;
+        btn_PurchaseHistory.Text = "Lịch sử mua";
+        btn_PurchaseHistory.UseVisualStyleBackColor = true;
         // 
-        // col_RewardPoints
+        // btn_Refresh
         // 
-        col_RewardPoints.HeaderText = "Điểm tích lũy";
-        col_RewardPoints.MinimumWidth = 6;
-        col_RewardPoints.Name = "col_RewardPoints";
-        col_RewardPoints.Width = 125;
+        btn_Refresh.Location = new Point(498, 43);
+        btn_Refresh.Name = "btn_Refresh";
+        btn_Refresh.Size = new Size(140, 54);
+        btn_Refresh.TabIndex = 5;
+        btn_Refresh.Text = "Làm mới";
+        btn_Refresh.UseVisualStyleBackColor = true;
         // 
-        // col_MembershipTier
+        // groupBox1
         // 
-        col_MembershipTier.HeaderText = "Hạng";
-        col_MembershipTier.MinimumWidth = 6;
-        col_MembershipTier.Name = "col_MembershipTier";
-        col_MembershipTier.Width = 125;
+        groupBox1.Controls.Add(btn_AddCustomer);
+        groupBox1.Controls.Add(btn_Refresh);
+        groupBox1.Controls.Add(btn_Edit);
+        groupBox1.Controls.Add(btn_PurchaseHistory);
+        groupBox1.Location = new Point(12, 12);
+        groupBox1.Name = "groupBox1";
+        groupBox1.Size = new Size(659, 131);
+        groupBox1.TabIndex = 6;
+        groupBox1.TabStop = false;
+        // 
+        // groupBox2
+        // 
+        groupBox2.Controls.Add(txt_Search);
+        groupBox2.Controls.Add(label1);
+        groupBox2.Controls.Add(dgv_Guest);
+        groupBox2.Location = new Point(12, 149);
+        groupBox2.Name = "groupBox2";
+        groupBox2.Size = new Size(764, 549);
+        groupBox2.TabIndex = 7;
+        groupBox2.TabStop = false;
+        // 
+        // label1
+        // 
+        label1.AutoSize = true;
+        label1.Location = new Point(28, 34);
+        label1.Name = "label1";
+        label1.Size = new Size(72, 20);
+        label1.TabIndex = 0;
+        label1.Text = "Tìm Kiếm";
+        // 
+        // groupBox3
+        // 
+        groupBox3.Controls.Add(txt_PhoneNumber);
+        groupBox3.Controls.Add(txt_FullName);
+        groupBox3.Controls.Add(txt_Address);
+        groupBox3.Controls.Add(cbo_CustomerType);
+        groupBox3.Controls.Add(btn_Save);
+        groupBox3.Controls.Add(btn_Cancel);
+        groupBox3.Controls.Add(label6);
+        groupBox3.Controls.Add(label5);
+        groupBox3.Controls.Add(label4);
+        groupBox3.Controls.Add(label3);
+        groupBox3.Controls.Add(label2);
+        groupBox3.Location = new Point(795, 26);
+        groupBox3.Name = "groupBox3";
+        groupBox3.Size = new Size(334, 554);
+        groupBox3.TabIndex = 8;
+        groupBox3.TabStop = false;
+        groupBox3.Text = "groupBox3";
+        // 
+        // txt_Search
+        // 
+        txt_Search.Location = new Point(106, 34);
+        txt_Search.Name = "txt_Search";
+        txt_Search.Size = new Size(311, 27);
+        txt_Search.TabIndex = 2;
+        txt_Search.Text = "🔍 Tìm theo SĐT, tên khách hàng...";
+        // 
+        // col_Phone
+        // 
+        col_Phone.HeaderText = "SĐT";
+        col_Phone.MinimumWidth = 6;
+        col_Phone.Name = "col_Phone";
+        col_Phone.Width = 125;
+        // 
+        // col_Name
+        // 
+        col_Name.HeaderText = "Họ tên";
+        col_Name.MinimumWidth = 6;
+        col_Name.Name = "col_Name";
+        col_Name.Width = 125;
+        // 
+        // col_Type
+        // 
+        col_Type.HeaderText = "Loại KH";
+        col_Type.MinimumWidth = 6;
+        col_Type.Name = "col_Type";
+        col_Type.Width = 125;
+        // 
+        // col_Point
+        // 
+        col_Point.HeaderText = "Điểm tích lũy";
+        col_Point.MinimumWidth = 6;
+        col_Point.Name = "col_Point";
+        col_Point.Width = 125;
+        // 
+        // col_Total
+        // 
+        col_Total.HeaderText = "Tổng mua";
+        col_Total.MinimumWidth = 6;
+        col_Total.Name = "col_Total";
+        col_Total.Width = 125;
+        // 
+        // col_Date
+        // 
+        col_Date.HeaderText = "Ngày tạo";
+        col_Date.MinimumWidth = 6;
+        col_Date.Name = "col_Date";
+        col_Date.Width = 125;
+        // 
+        // label2
+        // 
+        label2.AutoSize = true;
+        label2.Location = new Point(20, 29);
+        label2.Name = "label2";
+        label2.Size = new Size(187, 20);
+        label2.TabIndex = 3;
+        label2.Text = "THÔNG TIN KHÁCH HÀNG";
+        // 
+        // label3
+        // 
+        label3.AutoSize = true;
+        label3.Location = new Point(20, 63);
+        label3.Name = "label3";
+        label3.Size = new Size(36, 20);
+        label3.TabIndex = 4;
+        label3.Text = "SĐT";
+        // 
+        // label4
+        // 
+        label4.AutoSize = true;
+        label4.Location = new Point(20, 148);
+        label4.Name = "label4";
+        label4.Size = new Size(56, 20);
+        label4.TabIndex = 5;
+        label4.Text = "Họ Tên";
+        // 
+        // label5
+        // 
+        label5.AutoSize = true;
+        label5.Location = new Point(20, 216);
+        label5.Name = "label5";
+        label5.Size = new Size(57, 20);
+        label5.TabIndex = 6;
+        label5.Text = "Địa Chỉ";
+        // 
+        // label6
+        // 
+        label6.AutoSize = true;
+        label6.Location = new Point(20, 285);
+        label6.Name = "label6";
+        label6.Size = new Size(81, 20);
+        label6.TabIndex = 7;
+        label6.Text = "Loại Khách";
+        // 
+        // btn_Save
+        // 
+        btn_Save.Location = new Point(20, 459);
+        btn_Save.Name = "btn_Save";
+        btn_Save.Size = new Size(140, 54);
+        btn_Save.TabIndex = 6;
+        btn_Save.Text = "Lưu";
+        btn_Save.UseVisualStyleBackColor = true;
+        // 
+        // btn_Cancel
+        // 
+        btn_Cancel.Location = new Point(188, 459);
+        btn_Cancel.Name = "btn_Cancel";
+        btn_Cancel.Size = new Size(140, 54);
+        btn_Cancel.TabIndex = 7;
+        btn_Cancel.Text = "Hủy";
+        btn_Cancel.UseVisualStyleBackColor = true;
+        // 
+        // cbo_CustomerType
+        // 
+        cbo_CustomerType.FormattingEnabled = true;
+        cbo_CustomerType.Items.AddRange(new object[] { "Thường", "Thân thiết", "VIP" });
+        cbo_CustomerType.Location = new Point(20, 328);
+        cbo_CustomerType.Name = "cbo_CustomerType";
+        cbo_CustomerType.Size = new Size(246, 28);
+        cbo_CustomerType.TabIndex = 8;
+        // 
+        // txt_Address
+        // 
+        txt_Address.Location = new Point(20, 239);
+        txt_Address.Name = "txt_Address";
+        txt_Address.Size = new Size(267, 27);
+        txt_Address.TabIndex = 3;
+        // 
+        // txt_FullName
+        // 
+        txt_FullName.Location = new Point(20, 171);
+        txt_FullName.Name = "txt_FullName";
+        txt_FullName.Size = new Size(267, 27);
+        txt_FullName.TabIndex = 9;
+        // 
+        // txt_PhoneNumber
+        // 
+        txt_PhoneNumber.Location = new Point(20, 90);
+        txt_PhoneNumber.Name = "txt_PhoneNumber";
+        txt_PhoneNumber.Size = new Size(267, 27);
+        txt_PhoneNumber.TabIndex = 10;
         // 
         // FormGuest
         // 
         AutoScaleDimensions = new SizeF(8F, 20F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(1320, 647);
-        Controls.Add(dgv_Guest);
+        ClientSize = new Size(1320, 690);
+        Controls.Add(groupBox3);
+        Controls.Add(groupBox2);
         Controls.Add(groupBox1);
         Name = "FormGuest";
         Text = "FormGuest";
         Load += FormGuest_Load;
-        groupBox1.ResumeLayout(false);
-        groupBox1.PerformLayout();
         ((ISupportInitialize)dgv_Guest).EndInit();
+        groupBox1.ResumeLayout(false);
+        groupBox2.ResumeLayout(false);
+        groupBox2.PerformLayout();
+        groupBox3.ResumeLayout(false);
+        groupBox3.PerformLayout();
         ResumeLayout(false);
     }
 
     #endregion
-
-    private GroupBox groupBox1;
-    private Button btn_search;
-    private Button btn_delete;
-    private Button btn_update;
-    private Button btn_add;
-    private ComboBox cbo_Rank;
-    private TextBox txt_Phone;
-    private TextBox txt_GuestName;
-    private TextBox txt_GuestID;
-    private Label label4;
-    private Label label3;
-    private Label label2;
-    private Label label1;
     private MySql.Data.MySqlClient.MySqlCommand mySqlCommand1;
     private DataGridView dgv_Guest;
-    private DataGridViewTextBoxColumn col_CustomerID;
-    private DataGridViewTextBoxColumn col_customer_name;
-    private DataGridViewTextBoxColumn col_PhoneNumber;
-    private DataGridViewTextBoxColumn col_RewardPoints;
-    private DataGridViewTextBoxColumn col_MembershipTier;
+    private Button btn_AddCustomer;
+    private Button btn_Edit;
+    private Button btn_PurchaseHistory;
+    private Button btn_Refresh;
+    private GroupBox groupBox1;
+    private GroupBox groupBox2;
+    private Label label1;
+    private GroupBox groupBox3;
+    private DataGridViewTextBoxColumn col_Phone;
+    private DataGridViewTextBoxColumn col_Name;
+    private DataGridViewTextBoxColumn col_Type;
+    private DataGridViewTextBoxColumn col_Point;
+    private DataGridViewTextBoxColumn col_Total;
+    private DataGridViewTextBoxColumn col_Date;
+    private TextBox txt_Search;
+    private Label label3;
+    private Label label2;
+    private Label label4;
+    private TextBox txt_PhoneNumber;
+    private TextBox txt_FullName;
+    private TextBox txt_Address;
+    private ComboBox cbo_CustomerType;
+    private Button btn_Save;
+    private Button btn_Cancel;
+    private Label label6;
+    private Label label5;
 }
