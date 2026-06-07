@@ -3,213 +3,210 @@ namespace GUI
     partial class FormInventory
     {
         private System.ComponentModel.IContainer components = null;
+        protected override void Dispose(bool disposing) { if (disposing && (components != null)) components.Dispose(); base.Dispose(disposing); }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        #region Windows Form Designer generated code
-
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
-            dgvInventory = new System.Windows.Forms.DataGridView();
-            txtProductCode = new System.Windows.Forms.TextBox();
-            txtProductName = new System.Windows.Forms.TextBox();
-            txtSystemQty = new System.Windows.Forms.TextBox();
-            nudActualQty = new System.Windows.Forms.NumericUpDown();
-            txtDifference = new System.Windows.Forms.TextBox();
-            txtNote = new System.Windows.Forms.TextBox();
-            btnUpdateRecord = new System.Windows.Forms.Button();
-            btnSaveInventory = new System.Windows.Forms.Button();
-            lbl1 = new System.Windows.Forms.Label();
-            lbl2 = new System.Windows.Forms.Label();
-            lbl3 = new System.Windows.Forms.Label();
-            lbl4 = new System.Windows.Forms.Label();
-            lbl5 = new System.Windows.Forms.Label();
-            lbl6 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)dgvInventory).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)nudActualQty).BeginInit();
+            pnl_header = new Panel();
+            btn_refresh = new Button();
+            btn_export = new Button();
+            btn_filter = new Button();
+            pnl_filters = new Panel();
+            cb_statusFilter = new ComboBox();
+            cb_categories = new ComboBox();
+            pnl_dashboard = new Panel();
+            lbl_outOfStockCount = new Label();
+            lbl_warningCount = new Label();
+            lbl_availableCount = new Label();
+            lbl_totalCount = new Label();
+            dgv_inventory = new DataGridView();
+            pnl_footer = new Panel();
+            lbl_needOrder = new Label();
+            lbl_timeUpdate = new Label();
+            pnl_header.SuspendLayout();
+            pnl_filters.SuspendLayout();
+            pnl_dashboard.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgv_inventory).BeginInit();
+            pnl_footer.SuspendLayout();
             SuspendLayout();
             // 
-            // dgvInventory
+            // pnl_header
             // 
-            dgvInventory.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dgvInventory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvInventory.Location = new System.Drawing.Point(12, 175);
-            dgvInventory.Name = "dgvInventory";
-            dgvInventory.RowHeadersWidth = 51;
-            dgvInventory.Size = new System.Drawing.Size(760, 215);
-            dgvInventory.TabIndex = 0;
-            dgvInventory.CellClick += dgvInventory_CellClick;
+            pnl_header.Controls.Add(btn_refresh);
+            pnl_header.Controls.Add(btn_export);
+            pnl_header.Controls.Add(btn_filter);
+            pnl_header.Dock = DockStyle.Top;
+            pnl_header.Location = new Point(0, 0);
+            pnl_header.Name = "pnl_header";
+            pnl_header.Size = new Size(784, 50);
+            pnl_header.TabIndex = 3;
             // 
-            // txtProductCode
+            // btn_refresh
             // 
-            txtProductCode.Location = new System.Drawing.Point(119, 20);
-            txtProductCode.Name = "txtProductCode";
-            txtProductCode.ReadOnly = true;
-            txtProductCode.Size = new System.Drawing.Size(180, 47);
-            txtProductCode.TabIndex = 1;
+            btn_refresh.Location = new Point(245, 10);
+            btn_refresh.Name = "btn_refresh";
+            btn_refresh.Size = new Size(100, 30);
+            btn_refresh.TabIndex = 0;
+            btn_refresh.Text = "🔄 Làm mới";
+            btn_refresh.Click += btn_refresh_Click;
             // 
-            // txtProductName
+            // btn_export
             // 
-            txtProductName.Location = new System.Drawing.Point(119, 55);
-            txtProductName.Name = "txtProductName";
-            txtProductName.ReadOnly = true;
-            txtProductName.Size = new System.Drawing.Size(180, 47);
-            txtProductName.TabIndex = 2;
-            txtProductName.TextChanged += txtProductName_TextChanged;
+            btn_export.Location = new Point(125, 10);
+            btn_export.Name = "btn_export";
+            btn_export.Size = new Size(110, 30);
+            btn_export.TabIndex = 1;
+            btn_export.Text = "📤 Xuất Excel";
+            btn_export.Click += btn_export_Click;
             // 
-            // txtSystemQty
+            // btn_filter
             // 
-            txtSystemQty.Location = new System.Drawing.Point(119, 90);
-            txtSystemQty.Name = "txtSystemQty";
-            txtSystemQty.ReadOnly = true;
-            txtSystemQty.Size = new System.Drawing.Size(180, 47);
-            txtSystemQty.TabIndex = 3;
+            btn_filter.Location = new Point(15, 10);
+            btn_filter.Name = "btn_filter";
+            btn_filter.Size = new Size(100, 30);
+            btn_filter.TabIndex = 2;
+            btn_filter.Text = "🔍 Kiểm kê";
+            btn_filter.Click += btn_filter_Click;
             // 
-            // nudActualQty
+            // pnl_filters
             // 
-            nudActualQty.Location = new System.Drawing.Point(430, 20);
-            nudActualQty.Maximum = new decimal(new int[] { 9999, 0, 0, 0 });
-            nudActualQty.Name = "nudActualQty";
-            nudActualQty.Size = new System.Drawing.Size(180, 47);
-            nudActualQty.TabIndex = 4;
-            nudActualQty.ValueChanged += nudActualQty_ValueChanged;
+            pnl_filters.Controls.Add(cb_statusFilter);
+            pnl_filters.Controls.Add(cb_categories);
+            pnl_filters.Dock = DockStyle.Top;
+            pnl_filters.Location = new Point(0, 50);
+            pnl_filters.Name = "pnl_filters";
+            pnl_filters.Size = new Size(784, 85);
+            pnl_filters.TabIndex = 2;
             // 
-            // txtDifference
+            // cb_statusFilter
             // 
-            txtDifference.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            txtDifference.Location = new System.Drawing.Point(430, 57);
-            txtDifference.Name = "txtDifference";
-            txtDifference.ReadOnly = true;
-            txtDifference.Size = new System.Drawing.Size(180, 39);
-            txtDifference.TabIndex = 5;
+            cb_statusFilter.Location = new Point(15, 48);
+            cb_statusFilter.Name = "cb_statusFilter";
+            cb_statusFilter.Size = new Size(750, 28);
+            cb_statusFilter.TabIndex = 0;
             // 
-            // txtNote
+            // cb_categories
             // 
-            txtNote.Location = new System.Drawing.Point(430, 92);
-            txtNote.Name = "txtNote";
-            txtNote.Size = new System.Drawing.Size(180, 47);
-            txtNote.TabIndex = 6;
-            txtNote.TextChanged += txtNote_TextChanged;
+            cb_categories.Location = new Point(15, 12);
+            cb_categories.Name = "cb_categories";
+            cb_categories.Size = new Size(750, 28);
+            cb_categories.TabIndex = 1;
             // 
-            // btnUpdateRecord
+            // pnl_dashboard
             // 
-            btnUpdateRecord.Location = new System.Drawing.Point(420, 125);
-            btnUpdateRecord.Name = "btnUpdateRecord";
-            btnUpdateRecord.Size = new System.Drawing.Size(137, 30);
-            btnUpdateRecord.TabIndex = 7;
-            btnUpdateRecord.Text = "Xác nhận số kiểm";
-            btnUpdateRecord.Click += btnUpdateRecord_Click;
+            pnl_dashboard.Controls.Add(lbl_outOfStockCount);
+            pnl_dashboard.Controls.Add(lbl_warningCount);
+            pnl_dashboard.Controls.Add(lbl_availableCount);
+            pnl_dashboard.Controls.Add(lbl_totalCount);
+            pnl_dashboard.Dock = DockStyle.Top;
+            pnl_dashboard.Location = new Point(0, 135);
+            pnl_dashboard.Name = "pnl_dashboard";
+            pnl_dashboard.Size = new Size(784, 65);
+            pnl_dashboard.TabIndex = 1;
             // 
-            // btnSaveInventory
+            // lbl_outOfStockCount
             // 
-            btnSaveInventory.Location = new System.Drawing.Point(12, 400);
-            btnSaveInventory.Name = "btnSaveInventory";
-            btnSaveInventory.Size = new System.Drawing.Size(160, 30);
-            btnSaveInventory.TabIndex = 8;
-            btnSaveInventory.Text = "Lưu biên bản kiểm kê";
-            btnSaveInventory.Click += btnSaveInventory_Click;
+            lbl_outOfStockCount.Location = new Point(590, 5);
+            lbl_outOfStockCount.Name = "lbl_outOfStockCount";
+            lbl_outOfStockCount.Size = new Size(175, 50);
+            lbl_outOfStockCount.TabIndex = 0;
+            lbl_outOfStockCount.Text = "2\r\nHết hàng";
             // 
-            // lbl1
+            // lbl_warningCount
             // 
-            lbl1.Location = new System.Drawing.Point(20, 23);
-            lbl1.Name = "lbl1";
-            lbl1.Size = new System.Drawing.Size(102, 24);
-            lbl1.TabIndex = 5;
-            lbl1.Text = "Mã sản phẩm:";
+            lbl_warningCount.Location = new Point(400, 5);
+            lbl_warningCount.Name = "lbl_warningCount";
+            lbl_warningCount.Size = new Size(175, 50);
+            lbl_warningCount.TabIndex = 1;
+            lbl_warningCount.Text = "4\r\nSắp hết (≤ MinStock)";
             // 
-            // lbl2
+            // lbl_availableCount
             // 
-            lbl2.Location = new System.Drawing.Point(20, 58);
-            lbl2.Name = "lbl2";
-            lbl2.Size = new System.Drawing.Size(112, 20);
-            lbl2.TabIndex = 4;
-            lbl2.Text = "Tên sản phẩm:";
+            lbl_availableCount.Location = new Point(210, 5);
+            lbl_availableCount.Name = "lbl_availableCount";
+            lbl_availableCount.Size = new Size(175, 50);
+            lbl_availableCount.TabIndex = 2;
+            lbl_availableCount.Text = "18\r\nCòn hàng";
             // 
-            // lbl3
+            // lbl_totalCount
             // 
-            lbl3.Location = new System.Drawing.Point(20, 93);
-            lbl3.Name = "lbl3";
-            lbl3.Size = new System.Drawing.Size(102, 24);
-            lbl3.TabIndex = 3;
-            lbl3.Text = "Tồn hệ thống:";
+            lbl_totalCount.Location = new Point(20, 5);
+            lbl_totalCount.Name = "lbl_totalCount";
+            lbl_totalCount.Size = new Size(175, 50);
+            lbl_totalCount.TabIndex = 3;
+            lbl_totalCount.Text = "24\r\nTổng sản phẩm";
             // 
-            // lbl4
+            // dgv_inventory
             // 
-            lbl4.Location = new System.Drawing.Point(330, 23);
-            lbl4.Name = "lbl4";
-            lbl4.Size = new System.Drawing.Size(94, 24);
-            lbl4.TabIndex = 2;
-            lbl4.Text = "Tồn thực tế:";
+            dgv_inventory.ColumnHeadersHeight = 29;
+            dgv_inventory.Dock = DockStyle.Fill;
+            dgv_inventory.Location = new Point(0, 200);
+            dgv_inventory.Name = "dgv_inventory";
+            dgv_inventory.RowHeadersWidth = 51;
+            dgv_inventory.Size = new Size(784, 190);
+            dgv_inventory.TabIndex = 0;
             // 
-            // lbl5
+            // pnl_footer
             // 
-            lbl5.Location = new System.Drawing.Point(330, 58);
-            lbl5.Name = "lbl5";
-            lbl5.Size = new System.Drawing.Size(85, 24);
-            lbl5.TabIndex = 1;
-            lbl5.Text = "Chênh lệch:";
+            pnl_footer.Controls.Add(lbl_needOrder);
+            pnl_footer.Controls.Add(lbl_timeUpdate);
+            pnl_footer.Dock = DockStyle.Bottom;
+            pnl_footer.Location = new Point(0, 390);
+            pnl_footer.Name = "pnl_footer";
+            pnl_footer.Size = new Size(784, 25);
+            pnl_footer.TabIndex = 4;
             // 
-            // lbl6
+            // lbl_needOrder
             // 
-            lbl6.Location = new System.Drawing.Point(330, 93);
-            lbl6.Name = "lbl6";
-            lbl6.Size = new System.Drawing.Size(103, 24);
-            lbl6.TabIndex = 0;
-            lbl6.Text = "Ghi chú xử lý:";
+            lbl_needOrder.Location = new Point(547, 3);
+            lbl_needOrder.Name = "lbl_needOrder";
+            lbl_needOrder.Size = new Size(194, 20);
+            lbl_needOrder.TabIndex = 0;
+            lbl_needOrder.Text = "Cần nhập thêm: 6 sản phẩm";
+            // 
+            // lbl_timeUpdate
+            // 
+            lbl_timeUpdate.Location = new Point(20, 3);
+            lbl_timeUpdate.Name = "lbl_timeUpdate";
+            lbl_timeUpdate.Size = new Size(226, 20);
+            lbl_timeUpdate.TabIndex = 1;
+            lbl_timeUpdate.Text = "Cập nhật lúc: 09:30 01/06/2026";
+            lbl_timeUpdate.Click += lbl_timeUpdate_Click;
             // 
             // FormInventory
             // 
-            ClientSize = new System.Drawing.Size(1175, 773);
-            Controls.Add(lbl6);
-            Controls.Add(lbl5);
-            Controls.Add(lbl4);
-            Controls.Add(lbl3);
-            Controls.Add(lbl2);
-            Controls.Add(lbl1);
-            Controls.Add(btnSaveInventory);
-            Controls.Add(btnUpdateRecord);
-            Controls.Add(txtNote);
-            Controls.Add(txtDifference);
-            Controls.Add(nudActualQty);
-            Controls.Add(txtSystemQty);
-            Controls.Add(txtProductName);
-            Controls.Add(txtProductCode);
-            Controls.Add(dgvInventory);
-            Text = "Kiểm kê kho hàng";
+            ClientSize = new Size(784, 415);
+            Controls.Add(dgv_inventory);
+            Controls.Add(pnl_dashboard);
+            Controls.Add(pnl_filters);
+            Controls.Add(pnl_header);
+            Controls.Add(pnl_footer);
+            Name = "FormInventory";
+            Text = "Kiểm kê tồn kho";
             Load += FormInventory_Load;
-            ((System.ComponentModel.ISupportInitialize)dgvInventory).EndInit();
-            ((System.ComponentModel.ISupportInitialize)nudActualQty).EndInit();
+            pnl_header.ResumeLayout(false);
+            pnl_filters.ResumeLayout(false);
+            pnl_dashboard.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgv_inventory).EndInit();
+            pnl_footer.ResumeLayout(false);
             ResumeLayout(false);
-            PerformLayout();
         }
 
-        #endregion
-
-        private System.Windows.Forms.DataGridView dgvInventory;
-        private System.Windows.Forms.TextBox txtProductCode;
-        private System.Windows.Forms.TextBox txtProductName;
-        private System.Windows.Forms.TextBox txtSystemQty;
-        private System.Windows.Forms.NumericUpDown nudActualQty;
-        private System.Windows.Forms.TextBox txtDifference;
-        private System.Windows.Forms.TextBox txtNote;
-        private System.Windows.Forms.Button btnUpdateRecord;
-        private System.Windows.Forms.Button btnSaveInventory;
-        private System.Windows.Forms.Label lbl1;
-        private System.Windows.Forms.Label lbl2;
-        private System.Windows.Forms.Label lbl3;
-        private System.Windows.Forms.Label lbl4;
-        private System.Windows.Forms.Label lbl5;
-        private System.Windows.Forms.Label lbl6;
+        private System.Windows.Forms.Panel pnl_header;
+        private System.Windows.Forms.Button btn_refresh;
+        private System.Windows.Forms.Button btn_export;
+        private System.Windows.Forms.Button btn_filter;
+        private System.Windows.Forms.Panel pnl_filters;
+        private System.Windows.Forms.ComboBox cb_statusFilter;
+        private System.Windows.Forms.ComboBox cb_categories;
+        private System.Windows.Forms.Panel pnl_dashboard;
+        private System.Windows.Forms.Label lbl_totalCount;
+        private System.Windows.Forms.Label lbl_outOfStockCount;
+        private System.Windows.Forms.Label lbl_warningCount;
+        private System.Windows.Forms.Label lbl_availableCount;
+        private System.Windows.Forms.DataGridView dgv_inventory;
+        private System.Windows.Forms.Panel pnl_footer;
+        private System.Windows.Forms.Label lbl_needOrder;
+        private System.Windows.Forms.Label lbl_timeUpdate;
     }
 }
