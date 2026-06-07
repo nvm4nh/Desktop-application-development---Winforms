@@ -44,3 +44,4 @@ C:\Users\tytri\Source\Repos\Desktop-application-development---Winforms\GUI\obj\D
 C:\Users\tytri\Source\Repos\Desktop-application-development---Winforms\GUI\obj\Debug\net9.0-windows\GUI.pdb
 C:\Users\tytri\Source\Repos\Desktop-application-development---Winforms\GUI\obj\Debug\net9.0-windows\GUI.genruntimeconfig.cache
 C:\Users\tytri\Source\Repos\Desktop-application-development---Winforms\GUI\obj\Debug\net9.0-windows\ref\GUI.dll
+C:\Users\tytri\Source\Repos\Desktop-application-development---Winforms\GUI\obj\Debug\net9.0-windows\GUI.FormManageProduct.resources
