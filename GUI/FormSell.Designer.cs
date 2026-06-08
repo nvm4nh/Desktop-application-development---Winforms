@@ -22,12 +22,6 @@ partial class FormSell
     private void InitializeComponent()
     {
         dgv_cart = new System.Windows.Forms.DataGridView();
-        col_ProductName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-        col_SerialNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-        col_Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-        col_UnitPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-        col_TotalPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-        col_Remove = new System.Windows.Forms.DataGridViewTextBoxColumn();
         backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
         grp_Action = new System.Windows.Forms.GroupBox();
         btn_promotion = new System.Windows.Forms.Button();
@@ -45,6 +39,12 @@ partial class FormSell
         groupBox4 = new System.Windows.Forms.GroupBox();
         cbo_paymentMethod = new System.Windows.Forms.ComboBox();
         btn_confirmPayment = new System.Windows.Forms.Button();
+        col_productsName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+        col_serielsNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+        col_Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+        col_UnitPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+        col_TotalPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+        col_Remove = new System.Windows.Forms.DataGridViewTextBoxColumn();
         ((System.ComponentModel.ISupportInitialize)dgv_cart).BeginInit();
         grp_Action.SuspendLayout();
         pnl_top.SuspendLayout();
@@ -55,55 +55,13 @@ partial class FormSell
         // dgv_cart
         // 
         dgv_cart.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-        dgv_cart.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { col_ProductName, col_SerialNumber, col_Quantity, col_UnitPrice, col_TotalPrice, col_Remove });
+        dgv_cart.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { col_productsName, col_serielsNumber, col_Quantity, col_UnitPrice, col_TotalPrice, col_Remove });
         dgv_cart.Location = new System.Drawing.Point(-1, 191);
         dgv_cart.Name = "dgv_cart";
         dgv_cart.RowHeadersWidth = 51;
         dgv_cart.Size = new System.Drawing.Size(1650, 349);
         dgv_cart.TabIndex = 4;
         dgv_cart.CellContentClick += dgv_Cart_CellContentClick;
-        // 
-        // col_ProductName
-        // 
-        col_ProductName.HeaderText = "Tên SP";
-        col_ProductName.MinimumWidth = 12;
-        col_ProductName.Name = "col_ProductName";
-        col_ProductName.Width = 250;
-        // 
-        // col_SerialNumber
-        // 
-        col_SerialNumber.HeaderText = "Serial";
-        col_SerialNumber.MinimumWidth = 12;
-        col_SerialNumber.Name = "col_SerialNumber";
-        col_SerialNumber.Width = 200;
-        // 
-        // col_Quantity
-        // 
-        col_Quantity.HeaderText = "SL";
-        col_Quantity.MinimumWidth = 12;
-        col_Quantity.Name = "col_Quantity";
-        col_Quantity.Width = 80;
-        // 
-        // col_UnitPrice
-        // 
-        col_UnitPrice.HeaderText = "Đơn giá";
-        col_UnitPrice.MinimumWidth = 12;
-        col_UnitPrice.Name = "col_UnitPrice";
-        col_UnitPrice.Width = 150;
-        // 
-        // col_TotalPrice
-        // 
-        col_TotalPrice.HeaderText = "Thành tiền";
-        col_TotalPrice.MinimumWidth = 12;
-        col_TotalPrice.Name = "col_TotalPrice";
-        col_TotalPrice.Width = 150;
-        // 
-        // col_Remove
-        // 
-        col_Remove.HeaderText = "Xóa";
-        col_Remove.MinimumWidth = 12;
-        col_Remove.Name = "col_Remove";
-        col_Remove.Width = 70;
         // 
         // grp_Action
         // 
@@ -266,6 +224,48 @@ partial class FormSell
         btn_confirmPayment.UseVisualStyleBackColor = true;
         btn_confirmPayment.Click += btn_ConfirmPayment_Click;
         // 
+        // col_productsName
+        // 
+        col_productsName.HeaderText = "Tên SP";
+        col_productsName.MinimumWidth = 12;
+        col_productsName.Name = "col_productsName";
+        col_productsName.Width = 250;
+        // 
+        // col_serielsNumber
+        // 
+        col_serielsNumber.HeaderText = "Serial";
+        col_serielsNumber.MinimumWidth = 12;
+        col_serielsNumber.Name = "col_serielsNumber";
+        col_serielsNumber.Width = 200;
+        // 
+        // col_Quantity
+        // 
+        col_Quantity.HeaderText = "SL";
+        col_Quantity.MinimumWidth = 12;
+        col_Quantity.Name = "col_Quantity";
+        col_Quantity.Width = 80;
+        // 
+        // col_UnitPrice
+        // 
+        col_UnitPrice.HeaderText = "Đơn giá";
+        col_UnitPrice.MinimumWidth = 12;
+        col_UnitPrice.Name = "col_UnitPrice";
+        col_UnitPrice.Width = 150;
+        // 
+        // col_TotalPrice
+        // 
+        col_TotalPrice.HeaderText = "Thành tiền";
+        col_TotalPrice.MinimumWidth = 12;
+        col_TotalPrice.Name = "col_TotalPrice";
+        col_TotalPrice.Width = 150;
+        // 
+        // col_Remove
+        // 
+        col_Remove.HeaderText = "Xóa";
+        col_Remove.MinimumWidth = 12;
+        col_Remove.Name = "col_Remove";
+        col_Remove.Width = 70;
+        // 
         // FormSell
         // 
         AutoScaleDimensions = new System.Drawing.SizeF(17F, 41F);
@@ -288,6 +288,9 @@ partial class FormSell
         ResumeLayout(false);
     }
 
+    private System.Windows.Forms.DataGridViewTextBoxColumn col_productsName;
+    private System.Windows.Forms.DataGridViewTextBoxColumn col_serielsNumber;
+
     #endregion
 
     private System.Windows.Forms.DataGridView dgv_cart;
@@ -308,8 +311,6 @@ partial class FormSell
     private System.Windows.Forms.GroupBox groupBox4;
     private System.Windows.Forms.ComboBox cbo_paymentMethod;
     private System.Windows.Forms.Button btn_confirmPayment;
-    private System.Windows.Forms.DataGridViewTextBoxColumn col_ProductName;
-    private System.Windows.Forms.DataGridViewTextBoxColumn col_SerialNumber;
     private System.Windows.Forms.DataGridViewTextBoxColumn col_Quantity;
     private System.Windows.Forms.DataGridViewTextBoxColumn col_UnitPrice;
     private System.Windows.Forms.DataGridViewTextBoxColumn col_TotalPrice;
