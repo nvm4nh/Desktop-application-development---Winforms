@@ -5,103 +5,140 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using DAL;
-using Dapper;
 using DTO;
+using BUS;
 using ClosedXML.Excel; // Đưa thư viện Excel vào sử dụng
 
 namespace GUI;
 
 public partial class FormReport : Form
 {
+    private ReportsBUS _reportsBus = new ReportsBUS();
+    private ProductsBUS _productsBus = new ProductsBUS();
+    private CustomersBUS _customersBus = new CustomersBUS();
+
     // Khởi tạo hộp thoại lưu file bằng code (Không cần kéo thả Toolbox)
     private readonly SaveFileDialog saveDialog_Excel = new SaveFileDialog();
 
     public FormReport()
     {
         InitializeComponent();
+        ControlStandardization.ApplyFormStandard(this);
+        ApplyStyles();
         LoadReport();
+    }
+
+    private void ApplyStyles()
+    {
+        // Áp dụng chuẩn cho các panel chính
+        ControlStandardization.ApplyTopBarPanelStandard(pnl_top);
+        ControlStandardization.ApplyStatusPanelStandard(pnl_footer);
+
+        // Áp dụng chuẩn cho DataGridView
+        ControlStandardization.ApplyDataGridViewStandard(dgv_listInvoices);
+
+        // Đảm bảo Form có nền trắng
+        this.BackColor = Color.White;
+
+        // Cập nhật vị trí các nút trong pnl_top
+        ControlStandardization.ApplyTopBarButtonStandard(btn_showReport, ButtonPosition.Add);
+        ControlStandardization.ApplyTopBarButtonStandard(btn_excelOut, ButtonPosition.Edit);
+
+        foreach (Control ctrl in pnl_top.Controls)
+        {
+            if (ctrl is Button btn)
+            {
+                btn.ForeColor = Color.Black;
+                btn.UseVisualStyleBackColor = true;
+            }
+        }
+
+        // Căn chỉnh bộ lọc trong groupBox1
+        groupBox1.Dock = DockStyle.Top;
+        groupBox1.Height = 180;
+        
+        // Sắp xếp các control trong groupBox1 cho gọn gàng
+        cbb_dayFill.Location = new Point(12, 25);
+        dtp_from.Location = new Point(170, 25);
+        label1.Location = new Point(285, 28);
+        dtp_to.Location = new Point(330, 25);
+
+        panel3.Dock = DockStyle.Bottom; // Chứa các card thông tin
+        panel3.Height = 120;
+        panel3.BorderStyle = BorderStyle.None;
+        panel3.BackColor = Color.Transparent;
+
+        // Dàn đều các card thông tin trong panel3
+        int cardWidth = (this.ClientSize.Width - 40) / 5;
+        Control[] cards = { lbl_doanhThu, lbl_grossProfit, lbl_productSold, lbl_invoiceNum, lbl_warranty };
+        for (int i = 0; i < cards.Length; i++)
+        {
+            cards[i].Width = cardWidth;
+            cards[i].Height = 100;
+            cards[i].Location = new Point(10 + i * cardWidth, 10);
+            cards[i].Anchor = AnchorStyles.Top | AnchorStyles.Left;
+            
+            // Tinh chỉnh giao diện giống card
+            if (cards[i] is Label lbl)
+            {
+                lbl.Padding = new Padding(5);
+                lbl.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+                lbl.BackColor = Color.White;
+                lbl.BorderStyle = BorderStyle.FixedSingle;
+            }
+        }
     }
 
     private void LoadReport()
     {
         DateTime from = dtp_from.Value.Date;
-        DateTime to = dtp_to.Value.Date;
+        DateTime to = dtp_to.Value.Date.AddDays(1).AddTicks(-1);
 
-        var summary = GetSummary_Direct(from, to);
+        var summary = _reportsBus.GetSummaryByRange(from, to);
         UpdateCards(summary.revenue, summary.profit, summary.invoiceCount, summary.productCount, summary.warrantyCount);
 
-        var data = GetReportData_Direct(from, to);
+        var data = GetReportData(from, to);
         LoadTable(data);
         UpdateFooter(from, to);
     }
 
-    private (decimal revenue, decimal profit, int invoiceCount, int productCount, int warrantyCount) GetSummary_Direct(DateTime from, DateTime to)
+    private List<object> GetReportData(DateTime from, DateTime to)
     {
-        using (IDbConnection db = DatabaseHelper.GetConnection())
+        var invoices = _reportsBus.GetInvoicesByRange(from, to);
+        var reportList = new List<object>();
+        
+        // Load một lần để dùng chung (tối ưu hơn là query trong loop)
+        var allProducts = _productsBus.GetAll(); 
+        var allCustomers = _customersBus.GetAll();
+        var salesBus = new SalesBUS();
+
+        foreach (var inv in invoices)
         {
-            string sqlInvoices = "SELECT * FROM SalesInvoices WHERE DATE(SaleDate) BETWEEN DATE(@from) AND DATE(@to)";
-            var invoices = db.Query<SalesInvoicesDTO>(sqlInvoices, new { from, to }).ToList();
-
-            string sqlWarranties = "SELECT COUNT(*) FROM WarrantyClaims WHERE DATE(ReceiveDate) BETWEEN DATE(@from) AND DATE(@to)";
-            int warrantyCount = db.ExecuteScalar<int>(sqlWarranties, new { from, to });
-
-            decimal revenue = 0, cost = 0;
-            int productCount = 0;
-
-            foreach (var inv in invoices)
-            {
-                revenue += inv.FinalAmount;
-                string sqlDetails = "SELECT * FROM SalesDetails WHERE InvoiceID = @InvoiceID";
-                var details = db.Query<SalesDetailsDTO>(sqlDetails, new { inv.InvoiceID }).ToList();
-                cost += details.Sum(d => d.CostPrice * d.Quantity);
-                productCount += details.Sum(d => d.Quantity);
-            }
-
-            return (revenue, revenue - cost, invoices.Count, productCount, warrantyCount);
-        }
-    }
-
-    private List<object> GetReportData_Direct(DateTime from, DateTime to)
-    {
-        using (IDbConnection db = DatabaseHelper.GetConnection())
-        {
-            string sqlInvoices = "SELECT * FROM SalesInvoices WHERE DATE(SaleDate) BETWEEN DATE(@from) AND DATE(@to)";
-            var invoices = db.Query<SalesInvoicesDTO>(sqlInvoices, new { from, to }).ToList();
+            // Lấy chi tiết hóa đơn từ BUS
+            var details = salesBus.GetInvoiceDetails(inv.InvoiceID);
             
-            var reportList = new List<object>();
-            var allProducts = db.Query<ProductsDTO>("SELECT * FROM Products").ToList();
+            var customer = allCustomers.FirstOrDefault(c => c.CustomerID == inv.CustomerID);
 
-            foreach (var inv in invoices)
+            decimal totalCost = details.Sum(d => d.CostPrice * d.Quantity);
+            string productSummary = string.Join(", ", details.Select(d => {
+                var product = allProducts.FirstOrDefault(p => p.ProductID == d.ProductID);
+                return product != null ? product.ProductName : "Sản phẩm";
+            }).ToArray());
+
+            reportList.Add(new
             {
-                string sqlDetails = "SELECT * FROM SalesDetails WHERE InvoiceID = @InvoiceID";
-                var details = db.Query<SalesDetailsDTO>(sqlDetails, new { inv.InvoiceID }).ToList();
-                
-                string sqlCustomer = "SELECT * FROM Customers WHERE CustomerID = @CustomerID";
-                var customer = inv.CustomerID.HasValue 
-                    ? db.QueryFirstOrDefault<CustomersDTO>(sqlCustomer, new { CustomerID = inv.CustomerID.Value }) 
-                    : null;
-
-                decimal totalCost = details.Sum(d => d.CostPrice * d.Quantity);
-                string productSummary = string.Join(", ", details.Select(d => {
-                    var product = allProducts.FirstOrDefault(p => p.ProductID == d.ProductID);
-                    return product != null ? product.ProductName : "Sản phẩm";
-                }));
-
-                reportList.Add(new
-                {
-                    InvoiceID = inv.InvoiceID,
-                    InvoiceCode = inv.InvoiceCode,
-                    SaleDate = inv.SaleDate,
-                    CustomerName = customer?.FullName ?? "Khách lẻ",
-                    ProductSummary = productSummary,
-                    FinalAmount = inv.FinalAmount,
-                    Profit = inv.FinalAmount - totalCost,
-                    PaymentMethod = inv.PaymentMethod
-                });
-            }
-
-            return reportList;
+                InvoiceID = inv.InvoiceID,
+                InvoiceCode = inv.InvoiceCode,
+                SaleDate = inv.SaleDate,
+                CustomerName = customer?.FullName ?? "Khách lẻ",
+                ProductSummary = productSummary,
+                FinalAmount = inv.FinalAmount,
+                Profit = inv.FinalAmount - totalCost,
+                PaymentMethod = inv.PaymentMethod
+            });
         }
+
+        return reportList;
     }
 
     private void UpdateCards(decimal revenue, decimal profit, int invoiceCount, int productCount, int warrantyCount)
@@ -155,6 +192,11 @@ public partial class FormReport : Form
         if (lbl_footerLeft != null) 
             lbl_footerLeft.Text = $"Báo cáo từ ngày: {from:dd/MM/yyyy} đến {to:dd/MM/yyyy}";
         
+        lbl_footerLeft.BackColor = Color.Transparent;
+        lbl_footerRight.BackColor = Color.Transparent;
+        lbl_footerLeft.ForeColor = Color.Black;
+        lbl_footerRight.ForeColor = Color.Black;
+
         if (lbl_footerRight != null)
         {
             // Tính tỉ lệ lợi nhuận nếu cần
@@ -257,4 +299,14 @@ public partial class FormReport : Form
 
     private void label1_Click(object sender, EventArgs e) { }
     private void pnl_Top_Paint(object sender, PaintEventArgs e) { }
+
+    private void FormReport_Load(object sender, EventArgs e)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    private void FormReport_Load_1(object sender, EventArgs e)
+    {
+        throw new System.NotImplementedException();
+    }
 }

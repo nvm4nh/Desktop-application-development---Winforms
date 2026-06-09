@@ -182,6 +182,7 @@ partial class FormManageShift
         // lbl_shiftStatus
         // 
         lbl_shiftStatus.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+        lbl_shiftStatus.ForeColor = System.Drawing.Color.FromArgb(((int)((byte)64)), ((int)((byte)64)), ((int)((byte)64)));
         lbl_shiftStatus.Location = new System.Drawing.Point(2, 50);
         lbl_shiftStatus.Name = "lbl_shiftStatus";
         lbl_shiftStatus.Size = new System.Drawing.Size(145, 45);
@@ -193,6 +194,7 @@ partial class FormManageShift
         // lbl_resStatus
         // 
         lbl_resStatus.BackColor = System.Drawing.SystemColors.ControlLight;
+        lbl_resStatus.ForeColor = System.Drawing.Color.FromArgb(((int)((byte)0)), ((int)((byte)192)), ((int)((byte)0)));
         lbl_resStatus.Location = new System.Drawing.Point(2, 2);
         lbl_resStatus.Name = "lbl_resStatus";
         lbl_resStatus.Size = new System.Drawing.Size(145, 45);
@@ -221,6 +223,7 @@ partial class FormManageShift
         // lbl_resTime
         // 
         lbl_resTime.BackColor = System.Drawing.SystemColors.ControlLight;
+        lbl_resTime.ForeColor = System.Drawing.SystemColors.Highlight;
         lbl_resTime.Location = new System.Drawing.Point(2, 2);
         lbl_resTime.Name = "lbl_resTime";
         lbl_resTime.Size = new System.Drawing.Size(145, 45);
@@ -249,6 +252,7 @@ partial class FormManageShift
         // lbl_resMoney
         // 
         lbl_resMoney.BackColor = System.Drawing.SystemColors.ControlLight;
+        lbl_resMoney.ForeColor = System.Drawing.SystemColors.Highlight;
         lbl_resMoney.Location = new System.Drawing.Point(2, 2);
         lbl_resMoney.Name = "lbl_resMoney";
         lbl_resMoney.Size = new System.Drawing.Size(145, 45);
@@ -278,6 +282,7 @@ partial class FormManageShift
         // lbl_resActivity
         // 
         lbl_resActivity.BackColor = System.Drawing.SystemColors.ControlLight;
+        lbl_resActivity.ForeColor = System.Drawing.Color.FromArgb(((int)((byte)0)), ((int)((byte)192)), ((int)((byte)0)));
         lbl_resActivity.Location = new System.Drawing.Point(2, 2);
         lbl_resActivity.Name = "lbl_resActivity";
         lbl_resActivity.Size = new System.Drawing.Size(145, 45);
@@ -306,6 +311,7 @@ partial class FormManageShift
         // lbl_resRevenue
         // 
         lbl_resRevenue.BackColor = System.Drawing.SystemColors.ControlLight;
+        lbl_resRevenue.ForeColor = System.Drawing.SystemColors.MenuHighlight;
         lbl_resRevenue.Location = new System.Drawing.Point(2, 2);
         lbl_resRevenue.Name = "lbl_resRevenue";
         lbl_resRevenue.Size = new System.Drawing.Size(145, 45);
@@ -379,6 +385,7 @@ partial class FormManageShift
         Controls.Add(pnl_footer);
         Margin = new System.Windows.Forms.Padding(6);
         Text = "Quản lí ca làm việc";
+        TransparencyKey = System.Drawing.Color.White;
         ((System.ComponentModel.ISupportInitialize)dgv_listShift).EndInit();
         panel1.ResumeLayout(false);
         panel2.ResumeLayout(false);

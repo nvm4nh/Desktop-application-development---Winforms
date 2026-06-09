@@ -32,6 +32,8 @@ partial class FormReport
     private void InitializeComponent()
     {
         components = new System.ComponentModel.Container();
+        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
         pnl_top = new System.Windows.Forms.Panel();
         btn_excelOut = new System.Windows.Forms.Button();
         btn_showReport = new System.Windows.Forms.Button();
@@ -71,17 +73,20 @@ partial class FormReport
         // 
         // pnl_top
         // 
+        pnl_top.BackColor = System.Drawing.Color.WhiteSmoke;
         pnl_top.Controls.Add(btn_excelOut);
         pnl_top.Controls.Add(btn_showReport);
         pnl_top.Dock = System.Windows.Forms.DockStyle.Top;
+        pnl_top.ForeColor = System.Drawing.Color.White;
         pnl_top.Location = new System.Drawing.Point(0, 0);
         pnl_top.Name = "pnl_top";
-        pnl_top.Size = new System.Drawing.Size(784, 50);
+        pnl_top.Size = new System.Drawing.Size(944, 50);
         pnl_top.TabIndex = 1;
         pnl_top.Paint += pnl_Top_Paint;
         // 
         // btn_excelOut
         // 
+        btn_excelOut.ForeColor = System.Drawing.Color.Black;
         btn_excelOut.Location = new System.Drawing.Point(180, 10);
         btn_excelOut.Name = "btn_excelOut";
         btn_excelOut.Size = new System.Drawing.Size(120, 30);
@@ -92,7 +97,8 @@ partial class FormReport
         // 
         // btn_showReport
         // 
-        btn_showReport.Location = new System.Drawing.Point(15, 10);
+        btn_showReport.ForeColor = System.Drawing.Color.Black;
+        btn_showReport.Location = new System.Drawing.Point(24, 10);
         btn_showReport.Name = "btn_showReport";
         btn_showReport.Size = new System.Drawing.Size(150, 30);
         btn_showReport.TabIndex = 0;
@@ -129,13 +135,25 @@ partial class FormReport
         // 
         // dgv_listInvoices
         // 
+        dataGridViewCellStyle1.BackColor = System.Drawing.Color.Honeydew;
+        dgv_listInvoices.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+        dgv_listInvoices.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
+        dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+        dataGridViewCellStyle2.BackColor = System.Drawing.Color.WhiteSmoke;
+        dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F);
+        dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+        dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+        dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+        dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+        dgv_listInvoices.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
         dgv_listInvoices.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
         dgv_listInvoices.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { col_maHD, col_thoiGian, col_khachHang, col_sanPham, col_doanhThu, col_loiNhuan, col_thanhToan });
         dgv_listInvoices.Dock = System.Windows.Forms.DockStyle.Fill;
+        dgv_listInvoices.GridColor = System.Drawing.SystemColors.GrayText;
         dgv_listInvoices.Location = new System.Drawing.Point(0, 215);
         dgv_listInvoices.Name = "dgv_listInvoices";
         dgv_listInvoices.RowHeadersWidth = 51;
-        dgv_listInvoices.Size = new System.Drawing.Size(784, 150);
+        dgv_listInvoices.Size = new System.Drawing.Size(944, 150);
         dgv_listInvoices.TabIndex = 2;
         dgv_listInvoices.Text = "dataGridView1";
         // 
@@ -198,7 +216,7 @@ partial class FormReport
         // 
         cbb_dayFill.FormattingEnabled = true;
         cbb_dayFill.Items.AddRange(new object[] { "Hôm nay", "Hôm qua", "7 ngày qua", "Tháng này", "Tùy chỉnh" });
-        cbb_dayFill.Location = new System.Drawing.Point(10, 20);
+        cbb_dayFill.Location = new System.Drawing.Point(9, 19);
         cbb_dayFill.Name = "cbb_dayFill";
         cbb_dayFill.Size = new System.Drawing.Size(150, 28);
         cbb_dayFill.TabIndex = 3;
@@ -230,6 +248,7 @@ partial class FormReport
         // 
         // panel3
         // 
+        panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
         panel3.Controls.Add(lbl_warranty);
         panel3.Controls.Add(lbl_invoiceNum);
         panel3.Controls.Add(lbl_productSold);
@@ -238,42 +257,50 @@ partial class FormReport
         panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
         panel3.Location = new System.Drawing.Point(3, 52);
         panel3.Name = "panel3";
-        panel3.Size = new System.Drawing.Size(778, 110);
+        panel3.Size = new System.Drawing.Size(938, 110);
         panel3.TabIndex = 7;
         // 
         // lbl_warranty
         // 
-        lbl_warranty.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+        lbl_warranty.BackColor = System.Drawing.Color.White;
+        lbl_warranty.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+        lbl_warranty.ForeColor = System.Drawing.Color.FromArgb(((int)((byte)255)), ((int)((byte)128)), ((int)((byte)0)));
         lbl_warranty.Location = new System.Drawing.Point(620, 5);
         lbl_warranty.Name = "lbl_warranty";
-        lbl_warranty.Size = new System.Drawing.Size(150, 50);
+        lbl_warranty.Size = new System.Drawing.Size(150, 100);
         lbl_warranty.TabIndex = 4;
         lbl_warranty.Text = "Bảo hành";
         lbl_warranty.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
         // 
         // lbl_invoiceNum
         // 
-        lbl_invoiceNum.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+        lbl_invoiceNum.BackColor = System.Drawing.Color.White;
+        lbl_invoiceNum.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+        lbl_invoiceNum.ForeColor = System.Drawing.SystemColors.HotTrack;
         lbl_invoiceNum.Location = new System.Drawing.Point(465, 5);
         lbl_invoiceNum.Name = "lbl_invoiceNum";
-        lbl_invoiceNum.Size = new System.Drawing.Size(150, 50);
+        lbl_invoiceNum.Size = new System.Drawing.Size(150, 100);
         lbl_invoiceNum.TabIndex = 3;
         lbl_invoiceNum.Text = "Số hóa đơn";
         lbl_invoiceNum.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
         // 
         // lbl_productSold
         // 
-        lbl_productSold.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+        lbl_productSold.BackColor = System.Drawing.Color.White;
+        lbl_productSold.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+        lbl_productSold.ForeColor = System.Drawing.SystemColors.MenuHighlight;
         lbl_productSold.Location = new System.Drawing.Point(310, 5);
         lbl_productSold.Name = "lbl_productSold";
-        lbl_productSold.Size = new System.Drawing.Size(150, 50);
+        lbl_productSold.Size = new System.Drawing.Size(150, 100);
         lbl_productSold.TabIndex = 2;
         lbl_productSold.Text = "Sản phẩm";
         lbl_productSold.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
         // 
         // lbl_grossProfit
         // 
-        lbl_grossProfit.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+        lbl_grossProfit.BackColor = System.Drawing.Color.White;
+        lbl_grossProfit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+        lbl_grossProfit.ForeColor = System.Drawing.Color.ForestGreen;
         lbl_grossProfit.Location = new System.Drawing.Point(155, 5);
         lbl_grossProfit.Name = "lbl_grossProfit";
         lbl_grossProfit.Size = new System.Drawing.Size(150, 100);
@@ -283,7 +310,9 @@ partial class FormReport
         // 
         // lbl_doanhThu
         // 
-        lbl_doanhThu.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+        lbl_doanhThu.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+        lbl_doanhThu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+        lbl_doanhThu.ForeColor = System.Drawing.SystemColors.Highlight;
         lbl_doanhThu.Location = new System.Drawing.Point(5, 5);
         lbl_doanhThu.Name = "lbl_doanhThu";
         lbl_doanhThu.Size = new System.Drawing.Size(145, 100);
@@ -293,35 +322,39 @@ partial class FormReport
         // 
         // pnl_footer
         // 
+        pnl_footer.BackColor = System.Drawing.Color.WhiteSmoke;
         pnl_footer.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
         pnl_footer.Controls.Add(lbl_footerRight);
         pnl_footer.Controls.Add(lbl_footerLeft);
         pnl_footer.Dock = System.Windows.Forms.DockStyle.Bottom;
         pnl_footer.Location = new System.Drawing.Point(0, 365);
         pnl_footer.Name = "pnl_footer";
-        pnl_footer.Size = new System.Drawing.Size(784, 50);
+        pnl_footer.Size = new System.Drawing.Size(944, 50);
         pnl_footer.TabIndex = 8;
         // 
         // lbl_footerRight
         // 
-        lbl_footerRight.Location = new System.Drawing.Point(400, 0);
+        lbl_footerRight.BackColor = System.Drawing.Color.LightGray;
+        lbl_footerRight.Location = new System.Drawing.Point(392, 0);
         lbl_footerRight.Name = "lbl_footerRight";
-        lbl_footerRight.Size = new System.Drawing.Size(380, 46);
+        lbl_footerRight.Size = new System.Drawing.Size(388, 46);
         lbl_footerRight.TabIndex = 1;
         lbl_footerRight.Text = "Tỉ lệ lợi nhuân";
         lbl_footerRight.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
         // 
         // lbl_footerLeft
         // 
-        lbl_footerLeft.Location = new System.Drawing.Point(5, 0);
+        lbl_footerLeft.BackColor = System.Drawing.Color.Gainsboro;
+        lbl_footerLeft.Location = new System.Drawing.Point(-2, 0);
         lbl_footerLeft.Name = "lbl_footerLeft";
-        lbl_footerLeft.Size = new System.Drawing.Size(380, 46);
+        lbl_footerLeft.Size = new System.Drawing.Size(396, 46);
         lbl_footerLeft.TabIndex = 0;
         lbl_footerLeft.Text = "Báo cáo ngày:";
         lbl_footerLeft.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
         // 
         // groupBox1
         // 
+        groupBox1.BackColor = System.Drawing.Color.WhiteSmoke;
         groupBox1.Controls.Add(cbb_dayFill);
         groupBox1.Controls.Add(dtp_from);
         groupBox1.Controls.Add(panel3);
@@ -330,7 +363,7 @@ partial class FormReport
         groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
         groupBox1.Location = new System.Drawing.Point(0, 50);
         groupBox1.Name = "groupBox1";
-        groupBox1.Size = new System.Drawing.Size(784, 165);
+        groupBox1.Size = new System.Drawing.Size(944, 165);
         groupBox1.TabIndex = 9;
         groupBox1.TabStop = false;
         // 
@@ -338,13 +371,16 @@ partial class FormReport
         // 
         AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-        ClientSize = new System.Drawing.Size(784, 415);
+        BackColor = System.Drawing.Color.White;
+        ClientSize = new System.Drawing.Size(944, 415);
         Controls.Add(dgv_listInvoices);
         Controls.Add(groupBox1);
         Controls.Add(pnl_footer);
         Controls.Add(pnl_top);
+        ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
         Margin = new System.Windows.Forms.Padding(6);
         Text = "Báo cáo doanh thu";
+        Load += FormReport_Load_1;
         pnl_top.ResumeLayout(false);
         panel2.ResumeLayout(false);
         ((System.ComponentModel.ISupportInitialize)dgv_listInvoices).EndInit();
