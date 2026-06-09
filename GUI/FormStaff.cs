@@ -16,6 +16,9 @@ namespace GUI
         public FormStaff()
         {
             InitializeComponent();
+
+            // Tự động giãn đều các cột DataGridView cho đẹp kín bảng
+            dgv_staffList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
         private void FormStaff_Load(object sender, EventArgs e)
@@ -28,38 +31,38 @@ namespace GUI
         private void LoadData()
         {
             List<UsersDTO> list = _userBUS.GetAll();
-            dgv_StaffList.DataSource = list;
+            dgv_staffList.DataSource = list;
 
             // Ẩn các cột không cần thiết cho gọn
-            if (dgv_StaffList.Columns["Password"] != null)
-                dgv_StaffList.Columns["Password"].Visible = false;
+            if (dgv_staffList.Columns["Password"] != null)
+                dgv_staffList.Columns["Password"].Visible = false;
 
-            if (dgv_StaffList.Columns["CreatedAt"] != null)
-                dgv_StaffList.Columns["CreatedAt"].Visible = false;
+            if (dgv_staffList.Columns["CreatedAt"] != null)
+                dgv_staffList.Columns["CreatedAt"].Visible = false;
 
             // Đổi tên cột hiển thị 
-            if (dgv_StaffList.Columns["UserID"] != null) dgv_StaffList.Columns["UserID"].HeaderText = "Mã NV";
-            if (dgv_StaffList.Columns["FullName"] != null) dgv_StaffList.Columns["FullName"].HeaderText = "Họ tên";
-            if (dgv_StaffList.Columns["Username"] != null) dgv_StaffList.Columns["Username"].HeaderText = "Tài khoản";
-            if (dgv_StaffList.Columns["Phone"] != null) dgv_StaffList.Columns["Phone"].HeaderText = "SĐT";
+            if (dgv_staffList.Columns["UserID"] != null) dgv_staffList.Columns["UserID"].HeaderText = "Mã NV";
+            if (dgv_staffList.Columns["FullName"] != null) dgv_staffList.Columns["FullName"].HeaderText = "Họ tên";
+            if (dgv_staffList.Columns["Username"] != null) dgv_staffList.Columns["Username"].HeaderText = "Tài khoản";
+            if (dgv_staffList.Columns["Phone"] != null) dgv_staffList.Columns["Phone"].HeaderText = "SĐT";
 
-            dgv_StaffList.ClearSelection();
+            dgv_staffList.ClearSelection();
             _selectedUserID = -1;
         }
 
         //2. Format lại màu chữ và đổi id quyền sang chữ
-        private void dgv_StaffList_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        private void dgv_staffList_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.Value == null) return;
 
-            if (dgv_StaffList.Columns[e.ColumnIndex].Name == "IsActive")
+            if (dgv_staffList.Columns[e.ColumnIndex].Name == "IsActive")
             {
                 bool isActive = (bool)e.Value;
                 e.Value = isActive ? "Hoạt động" : "Vô hiệu";
                 e.CellStyle.ForeColor = isActive ? Color.Green : Color.Red;
                 e.FormattingApplied = true;
             }
-            else if (dgv_StaffList.Columns[e.ColumnIndex].Name == "RoleID")
+            else if (dgv_staffList.Columns[e.ColumnIndex].Name == "RoleID")
             {
                 int roleId = (int)e.Value;
                 e.Value = GetRoleName(roleId);
@@ -68,65 +71,73 @@ namespace GUI
         }
 
         //3. Click 1 dòng đổ data sang các textbox 
-        private void dgv_StaffList_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void dgv_staffList_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && !_isAdding)
             {
-                DataGridViewRow row = dgv_StaffList.Rows[e.RowIndex];
+                DataGridViewRow row = dgv_staffList.Rows[e.RowIndex];
 
                 _selectedUserID = Convert.ToInt32(row.Cells["UserID"].Value);
-                txt_FullName.Text = row.Cells["FullName"].Value?.ToString();
-                txt_Username.Text = row.Cells["Username"].Value?.ToString();
-                txt_Phone.Text = row.Cells["Phone"].Value?.ToString();
-                txt_Password.Text = "******"; 
+                txt_fullName.Text = row.Cells["FullName"].Value?.ToString();
+                txt_username.Text = row.Cells["Username"].Value?.ToString();
+                txt_phone.Text = row.Cells["Phone"].Value?.ToString();
+                txt_password.Text = "******";
 
                 int roleId = Convert.ToInt32(row.Cells["RoleID"].Value);
-                cb_Role.Text = GetRoleName(roleId);
+                cbb_role.Text = GetRoleName(roleId);
             }
         }
 
         //4. Hàm bật/tắt các textbox và 
         private void SetInputState(bool isEnabled)
         {
-            txt_FullName.Enabled = isEnabled;
-            txt_Username.Enabled = isEnabled;
-            txt_Password.Enabled = isEnabled;
-            txt_Phone.Enabled = isEnabled;
-            cb_Role.Enabled = isEnabled;
+            // Tận dụng sức mạnh của GroupBox: Khóa 1 phát là khóa hết TextBox bên trong
+            if (grp_StaffDetails != null)
+            {
+                grp_StaffDetails.Enabled = isEnabled;
+            }
+            else // Dự phòng
+            {
+                txt_fullName.Enabled = isEnabled;
+                txt_username.Enabled = isEnabled;
+                txt_password.Enabled = isEnabled;
+                txt_phone.Enabled = isEnabled;
+                cbb_role.Enabled = isEnabled;
 
-            btn_StaffSave.Enabled = isEnabled;
-            btn_StaffCancel.Enabled = isEnabled;
+                btn_staffSave.Enabled = isEnabled;
+                btn_staffCancel.Enabled = isEnabled;
+            }
 
-            btn_StaffAdd.Enabled = !isEnabled;
-            btn_StaffEdit.Enabled = !isEnabled;
-            btn_StaffDisable.Enabled = !isEnabled;
-            btn_StaffResetPass.Enabled = !isEnabled;
-            dgv_StaffList.Enabled = !isEnabled;
+            btn_staffAdd.Enabled = !isEnabled;
+            btn_staffEdit.Enabled = !isEnabled;
+            btn_staffDisable.Enabled = !isEnabled;
+            btn_staffResetPass.Enabled = !isEnabled;
+            dgv_staffList.Enabled = !isEnabled;
         }
-        
+
         //5. xóa trắng các ô nhập
         private void ClearInputs()
         {
-            txt_FullName.Clear();
-            txt_Username.Clear();
-            txt_Password.Clear();
-            txt_Phone.Clear();
-            cb_Role.SelectedIndex = -1;
+            txt_fullName.Clear();
+            txt_username.Clear();
+            txt_password.Clear();
+            txt_phone.Clear();
+            cbb_role.SelectedIndex = -1;
         }
-        
+
         //6. Xử lý các nút 
         // xử lý nút thêm
-        private void btn_StaffAdd_Click(object sender, EventArgs e)
+        private void btn_staffAdd_Click(object sender, EventArgs e)
         {
             _isAdding = true;
             ClearInputs();
             SetInputState(true);
-            cb_Role.SelectedIndex = 1; // mặc định để là Quản lý
-            txt_Username.Focus();
+            cbb_role.SelectedIndex = 1; // mặc định để là Quản lý
+            txt_username.Focus();
         }
 
         // xử lý nút sửa
-        private void btn_StaffEdit_Click(object sender, EventArgs e)
+        private void btn_staffEdit_Click(object sender, EventArgs e)
         {
             if (_selectedUserID == -1)
             {
@@ -136,12 +147,12 @@ namespace GUI
             _isAdding = false;
             SetInputState(true);
 
-            txt_Username.Enabled = false; // không cho sửa username
-            txt_Password.Enabled = false; // không cho sửa pass ở đây
+            txt_username.Enabled = false; // không cho sửa username
+            txt_password.Enabled = false; // không cho sửa pass ở đây
         }
 
         // xử lý nút làm mới
-        private void btn_StaffRefresh_Click(object sender, EventArgs e)
+        private void btn_staffRefresh_Click(object sender, EventArgs e)
         {
             LoadData();
             ClearInputs();
@@ -149,7 +160,7 @@ namespace GUI
         }
 
         // xử lý nút hủy
-        private void btn_StaffCancel_Click(object sender, EventArgs e)
+        private void btn_staffCancel_Click(object sender, EventArgs e)
         {
             _isAdding = false;
             ClearInputs();
@@ -157,10 +168,10 @@ namespace GUI
         }
 
         //7. lưu dữ liệu (xài chung cho cả thêm và sửa)
-        private void btn_StaffSave_Click(object sender, EventArgs e)
+        private void btn_staffSave_Click(object sender, EventArgs e)
         {
             // check xem có để trống không
-            if (string.IsNullOrWhiteSpace(txt_FullName.Text) || string.IsNullOrWhiteSpace(txt_Username.Text))
+            if (string.IsNullOrWhiteSpace(txt_fullName.Text) || string.IsNullOrWhiteSpace(txt_username.Text))
             {
                 MessageBox.Show("Vui lòng nhập đủ Họ tên và Tài khoản!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -168,10 +179,10 @@ namespace GUI
 
             var user = new UsersDTO
             {
-                FullName = txt_FullName.Text,
-                Username = txt_Username.Text,
-                Phone = txt_Phone.Text,
-                RoleID = GetRoleID(cb_Role.Text),
+                FullName = txt_fullName.Text,
+                Username = txt_username.Text,
+                Phone = txt_phone.Text,
+                RoleID = GetRoleID(cbb_role.Text),
                 IsActive = true
             };
 
@@ -181,7 +192,7 @@ namespace GUI
             if (_isAdding)
             {
                 // nếu không nhập pass thì lấy mặc định là 123456
-                user.Password = string.IsNullOrWhiteSpace(txt_Password.Text) ? "123456" : txt_Password.Text;
+                user.Password = string.IsNullOrWhiteSpace(txt_password.Text) ? "123456" : txt_password.Text;
                 (success, error) = _userBUS.Insert(user);
             }
             else
@@ -193,7 +204,7 @@ namespace GUI
             if (success)
             {
                 MessageBox.Show(_isAdding ? "Thêm mới thành công!" : "Sửa thông tin thành công!", "Thông báo");
-                btn_StaffRefresh_Click(null, null); // load lại grid
+                btn_staffRefresh_Click(null, null); // load lại grid
             }
             else
             {
@@ -202,7 +213,7 @@ namespace GUI
         }
 
         //8. khóa tài khoản nhân viên
-        private void btn_StaffDisable_Click(object sender, EventArgs e)
+        private void btn_staffDisable_Click(object sender, EventArgs e)
         {
             if (_selectedUserID == -1) return;
 
@@ -211,20 +222,20 @@ namespace GUI
                 var disabledUser = new UsersDTO
                 {
                     UserID = _selectedUserID,
-                    Username = txt_Username.Text,
-                    FullName = txt_FullName.Text,
-                    Phone = txt_Phone.Text,
-                    RoleID = GetRoleID(cb_Role.Text),
+                    Username = txt_username.Text,
+                    FullName = txt_fullName.Text,
+                    Phone = txt_phone.Text,
+                    RoleID = GetRoleID(cbb_role.Text),
                     IsActive = false // set thuộc tính này về false
                 };
 
                 var (success, err) = _userBUS.Update(disabledUser);
-                if (success) btn_StaffRefresh_Click(null, null);
+                if (success) btn_staffRefresh_Click(null, null);
             }
         }
 
         //9. reset pass về mặc định
-        private void btn_StaffResetPass_Click(object sender, EventArgs e)
+        private void btn_staffResetPass_Click(object sender, EventArgs e)
         {
             if (_selectedUserID == -1) return;
 
@@ -233,10 +244,10 @@ namespace GUI
                 var resetUser = new UsersDTO
                 {
                     UserID = _selectedUserID,
-                    Username = txt_Username.Text,
-                    FullName = txt_FullName.Text,
-                    Phone = txt_Phone.Text,
-                    RoleID = GetRoleID(cb_Role.Text),
+                    Username = txt_username.Text,
+                    FullName = txt_fullName.Text,
+                    Phone = txt_phone.Text,
+                    RoleID = GetRoleID(cbb_role.Text),
                     IsActive = true,
                     Password = "123456" // đè mật khẩu mới vô
                 };
